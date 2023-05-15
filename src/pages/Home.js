@@ -27,7 +27,7 @@ function Home() {
               Here's our favorite recommendations:
             </h1>
             <div class="movie-list">
-              <div class="movie">
+              <div class="movie" onClick={() => navigate("/movie/tt0133093")}>
                 <figure class="movie__poster--wrapper">
                   <img
                     class="movie__poster"

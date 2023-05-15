@@ -1,3 +1,4 @@
+import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function Nav() {
@@ -10,10 +11,9 @@ function Nav() {
               src="compass.png"
               alt=""
               class="logo__img click"
-              onclick="goHome()"
             />
           </figure>
-          <h4 class="nav__logo--name click" onclick="goHome()">
+          <h4 class="nav__logo--name click">
             Movie Finder
           </h4>
         </Link>
@@ -37,25 +37,25 @@ function Nav() {
         </ul>
 
         <button class="menu__btn menu__btn--open" onclick="openMenu()">
-          <i class="fas fa-bars"></i>
+          <FaBars/>
         </button>
       </nav>
 
       <div class="menu__backdrop">
         <button class="menu__btn menu__close--btn" onclick="closeMenu()">
-          <i class="fa fa-times"></i>
+          <FaTimes/>
         </button>
 
         <div class="menu__links">
-          <a class="menu__link" href="./index.html">
+          <Link class="menu__link" to="./index.html">
             Home
-          </a>
-          <a class="menu__link" href="./search.html">
+          </Link>
+          <Link class="menu__link" to="./search.html">
             Find a movie!
-          </a>
-          <a class="menu__link" href="">
+          </Link>
+          <Link class="menu__link" to="">
             Contact
-          </a>
+          </Link>
         </div>
       </div>
     </>

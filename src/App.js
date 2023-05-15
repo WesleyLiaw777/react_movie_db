@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Nav from './components/Nav';
 import Home from './pages/Home';
 import Search from './pages/Search';
+import Movie from './pages/Movie';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       </div>
       <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/movie/:id" element={<Movie/>}/>
         <Route path="/search" element={<Search/>}/>
       </Routes>
     </Router>
