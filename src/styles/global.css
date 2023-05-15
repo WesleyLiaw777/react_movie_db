@@ -48,6 +48,10 @@ button {
 
 /* GEN CLASSES */
 
+.cursor {
+  cursor: pointer;
+}
+
 .no_cursor {
   cursor: not-allowed;
 }
@@ -102,13 +106,23 @@ nav {
   align-items: center;
 }
 
+.nav__logo--container:hover .nav__logo--name {
+  color: rgb(142, 107, 21);
+}
+
 .nav__logo--figure {
   width: 50px;
   height: 50px;
 }
 
+.logo__img {
+  width: 100%;
+  height: 100%;
+}
+
 .nav__logo--name {
   margin-left: 20px;
+  transition: all 200ms ease;
 }
 
 .nav__link--list {
@@ -230,6 +244,9 @@ nav {
 
 #movie-display {
   margin-top: 120px;
+  margin-bottom: 60px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #movie-display--sorted {
@@ -257,6 +274,7 @@ nav {
   align-items: center;
   margin: 0 auto;
   margin-bottom: 40px;
+  cursor: pointer;
 }
 
 .movie__poster--wrapper {
@@ -305,31 +323,31 @@ nav {
 
 /* MOVIE PAGE */
 
-#movie_page{
+#movie_page {
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
   display: flex;
   gap: 64px;
+  padding: 24px 40px;
 }
 
-.main__movie--wrapper{
+.main__movie--wrapper {
   width: 300px;
   height: 500px;
 }
 
-.main__movie--info{
+.main__movie--info {
   width: 30%;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
-.main__movie--title{
+.main__movie--title {
   font-size: 40px;
 }
-
 
 /* RESPONSIVENESS */
 

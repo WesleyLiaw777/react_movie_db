@@ -5,55 +5,53 @@ function Nav() {
   return (
     <>
       <nav>
-        <Link to="/" class="nav__logo--container">
-          <figure class="nav__logo--figure">
-            <img
-              src="compass.png"
-              alt=""
-              class="logo__img click"
-            />
+        <Link to="/" className="nav__logo--container">
+          <figure className="nav__logo--figure">
+            <img src="/compass.png" alt="" className="logo__img click" />
           </figure>
-          <h4 class="nav__logo--name click">
-            Movie Finder
-          </h4>
+          <h4 className="nav__logo--name click">Movie Finder</h4>
         </Link>
 
-        <ul class="nav__link--list">
+        <ul className="nav__link--list">
           <li>
-            <Link to="/" class="nav__link link__hover-effect">
+            <Link to="/" className="nav__link link__hover-effect">
               Home
             </Link>
           </li>
           <li>
-            <Link to="./search" class="nav__link link__hover-effect">
+            <Link to="./search" className="nav__link link__hover-effect">
               Find a movie!
             </Link>
           </li>
           <li>
-            <Link to="#" class="nav__link link__hover-effect no_cursor">
+            <Link to="#" className="nav__link link__hover-effect no_cursor">
               Contact
             </Link>
           </li>
         </ul>
 
-        <button class="menu__btn menu__btn--open" onclick="openMenu()">
-          <FaBars/>
+        <button className="menu__btn menu__btn--open"
+        // onClick={openMenu()}
+        >
+          <FaBars />
         </button>
       </nav>
 
-      <div class="menu__backdrop">
-        <button class="menu__btn menu__close--btn" onclick="closeMenu()">
-          <FaTimes/>
+      <div className="menu__backdrop">
+        <button className="menu__btn menu__close--btn"
+        // onClick={closeMenu()}
+        >
+          <FaTimes />
         </button>
 
-        <div class="menu__links">
-          <Link class="menu__link" to="./index.html">
+        <div className="menu__links">
+          <Link className="menu__link" to="./index.html">
             Home
           </Link>
-          <Link class="menu__link" to="./search.html">
+          <Link className="menu__link" to="./search.html">
             Find a movie!
           </Link>
-          <Link class="menu__link" to="">
+          <Link className="menu__link" to="">
             Contact
           </Link>
         </div>
