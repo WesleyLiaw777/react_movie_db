@@ -1,7 +1,7 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaPlus, FaTicketAlt } from "react-icons/fa";
 
 const API_KEY = `e4584088`;
 const URL = `http://www.omdbapi.com/?apikey=${API_KEY}&i=`;
@@ -9,23 +9,30 @@ const URL = `http://www.omdbapi.com/?apikey=${API_KEY}&i=`;
 function Movie() {
   const { id } = useParams();
   const [movieInfo, setMovieInfo] = useState(null);
-  const navigate = useNavigate();
+  const [genres, setGenres] = useState([]);
+  const [runtime, setRuntime] = useState([]);
 
   const goBack = () => {
-    navigate(-1);
+    const currentPath = window.location.pathname;
+    const newPath = currentPath.substring(0, currentPath.lastIndexOf("/"));
+    window.location.href = newPath;
   };
 
   useEffect(() => {
     async function fetchMovieInfo() {
       const { data } = await axios.get(URL + id);
       setMovieInfo(data);
+      setGenres(data.Genre.split(","));
+
+      //gets runtime in minutes
+      setRuntime(data.Runtime.match(/(\d+)/)[0]);
     }
     fetchMovieInfo();
   }, [id]);
 
   return (
     <>
-      <button onClick={goBack}>
+      <button onClick={goBack} className="cursor">
         <FaArrowLeft /> Back
       </button>
 
@@ -39,13 +46,50 @@ function Movie() {
 
           <div className="main__movie--info">
             <h1 className="main__movie--title">{movieInfo.Title}</h1>
-            <h3>{movieInfo.Genre}</h3>
-            {movieInfo.Type === "series" ? (
-              <h4>Seasons: {movieInfo.totalSeasons}</h4>
-            ) : (
-              <h4>{movieInfo.Runtime}</h4>
-            )}
-            <p>{movieInfo.Plot}</p>
+            <div className="main__movie--subinfo">
+              <div>
+                {movieInfo.Year}
+                &nbsp;&middot;&nbsp;
+              </div>
+              <div>
+                {movieInfo.Type === "series" ? (
+                  <div>Seasons: {movieInfo.totalSeasons}</div>
+                ) : (
+                  <div>
+                    {Math.floor(runtime / 60)} hr {runtime % 60} min
+                  </div>
+                )}
+                
+              </div>
+              <div>
+                &nbsp;&middot;&nbsp;
+                {movieInfo.Rated}
+                </div>
+            </div>
+            <div>
+              {genres.map((genre) => {
+                return (
+                  <button className="cursor genre__button">{genre}</button>
+                );
+              })}
+            </div>
+            <p className="main__movie--description">{movieInfo.Plot}</p>
+            <button className="main__movie--button showtime__button cursor">
+              <FaTicketAlt className="main__button--icon showtime__icon" />
+              <div className="movie__button--info">
+                <h4>See Showtimes</h4>
+                <h5>and tickets</h5>
+              </div>
+            </button>
+            <button className="main__movie--button watchlist__button cursor">
+              <FaPlus className="main__button--icon watchlist__icon" />
+              <div className="movie__button--info watchlist__button--info">
+                <h4>Add to Watchlist</h4>
+                <h5 className="main__button--subtext">
+                  Upvoted by {movieInfo.imdbVotes} viewers
+                </h5>
+              </div>
+            </button>
           </div>
         </section>
       )}

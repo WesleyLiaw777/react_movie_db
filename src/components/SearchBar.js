@@ -1,19 +1,14 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SearchBar() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
 
-  function onSearch() {
-    console.log(searchTerm);
-  }
-
   function enterSearchTerm(key) {
     if (key === "Enter") {
-      console.log(searchTerm);
-      onSearch();
+      navigate(`/search/${searchTerm}`);
     }
   }
 

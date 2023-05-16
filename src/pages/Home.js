@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import {FaSearch} from "react-icons/fa"
 import SearchBar from "../components/SearchBar";
 
 function Home() {

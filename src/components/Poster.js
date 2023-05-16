@@ -1,17 +1,16 @@
-import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 
-function Poster({ movie }) {
+function Poster({ movie, keyword }) {
   let navigate = useNavigate();
+  let id = movie.imdbID;
   return (
     <>
       <div
         className="movie"
         key={movie.imdbID}
-        onClick={() => navigate(`/movie/${movie.imdbID}`)}
       >
-        <figure className="movie__poster--wrapper">
+        <figure className="movie__poster--wrapper" onClick={() => navigate(`/search/${keyword}/${id}`)}>
           <img className="movie__poster" src={movie.Poster} alt={movie.Title} />
         </figure>
         <div className="movie__info">
