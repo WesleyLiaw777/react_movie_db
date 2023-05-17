@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaArrowLeft, FaPlus, FaTicketAlt } from "react-icons/fa";
@@ -12,9 +12,16 @@ function Movie() {
   const [genres, setGenres] = useState([]);
   const [runtime, setRuntime] = useState([]);
 
+  let navigate = useNavigate();
+
   const goBack = () => {
     const currentPath = window.location.pathname;
+    console.log(currentPath);
     const newPath = currentPath.substring(0, currentPath.lastIndexOf("/"));
+    console.log(newPath);
+    if (newPath === "") {
+      navigate("/");
+    }
     window.location.href = newPath;
   };
 
@@ -59,17 +66,18 @@ function Movie() {
                     {Math.floor(runtime / 60)} hr {runtime % 60} min
                   </div>
                 )}
-                
               </div>
               <div>
                 &nbsp;&middot;&nbsp;
                 {movieInfo.Rated}
-                </div>
+              </div>
             </div>
             <div>
-              {genres.map((genre) => {
+              {genres.map((genre, index) => {
                 return (
-                  <button className="cursor genre__button">{genre}</button>
+                  <button className="cursor genre__button" key={index}>
+                    {genre}
+                  </button>
                 );
               })}
             </div>

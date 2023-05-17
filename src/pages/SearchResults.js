@@ -18,25 +18,29 @@ function SearchResults() {
     const firstSix = movies.Search.slice(0, MAX_RESULTS);
     setSearchResults(firstSix);
   }
-  
+
   useEffect(() => {
     if (keyword !== undefined) {
-        fetchMovies(keyword);
+      fetchMovies(keyword);
     }
-  }, [keyword])
+  }, [keyword]);
 
   return (
     <div>
       <SearchBar />
-      <div>Search results for "<span>{keyword}</span>"</div>
+      <>
+        {keyword && (
+          <div className="search__message">
+            Search results for "<span>{keyword}</span>"
+          </div>
+        )}
+      </>
       {!searchResults ? (
         <>LOADING</>
       ) : (
         <section id="movie-display">
           {searchResults.map((movie) => {
-            return (
-              <Poster movie={movie} keyword={keyword}/>
-            );
+            return <Poster movie={movie} keyword={keyword} key={movie.id} />;
           })}
         </section>
       )}
