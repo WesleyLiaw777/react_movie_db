@@ -39,7 +39,7 @@ function Movie() {
 
   return (
     <>
-      <button onClick={goBack} className="cursor">
+      <button onClick={goBack} className=" dark__button cursor">
         <FaArrowLeft /> Back
       </button>
 

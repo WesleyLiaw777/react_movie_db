@@ -15,7 +15,7 @@ function SearchBar() {
     if (key === "Enter") {
       if (searchTerm) {
         setLoading(true);
-        
+
         window.setTimeout(() => {
           navigate(`/search/${searchTerm}`);
           setLoading(false);
@@ -40,7 +40,9 @@ function SearchBar() {
 
   return (
     <>
-      <h1 className="title">Search for a movie here!</h1>
+      <div className="title__container">
+        <h1 className="title">Search for a movie here!</h1>
+      </div>
       <div className="sort__search">
         <input
           type="text"
