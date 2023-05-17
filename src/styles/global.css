@@ -26,7 +26,6 @@ a {
 }
 
 input {
-  padding: 4px 0;
   border: 4px solid transparent;
   transition: all 200ms;
   color: black;
@@ -37,6 +36,7 @@ input {
   transition: all 300ms ease;
   font-size: 16px;
   outline: none;
+  margin: 0 16px;
 }
 
 input:hover,
@@ -125,6 +125,19 @@ button:hover {
   color: black;
 }
 
+.greyed_out{
+  opacity: 0.5;
+}
+
+.hover_effect{
+  transition: all 100ms ease;
+}
+
+.hover_effect:hover{
+  color: gold;
+  border-color: gold;
+}
+
 /* NAV */
 
 nav {
@@ -183,6 +196,11 @@ nav {
   padding: 0 12px;
 }
 
+.menu__btn{
+  color: white;
+  border: 2px solid lightgrey;
+}
+
 .menu__btn--open {
   display: none;
 }
@@ -195,21 +213,21 @@ nav {
 
 .menu__backdrop {
   position: absolute;
-  top: 20px;
-  right: 16px;
+  top: 6px;
+  right: 12px;
   left: 16px;
-  height: 100px;
-  background-color: blanchedalmond;
-  border: 2px solid white;
+  height: 200px;
+  background-color: black;
+  border: 4px solid gold;
   z-index: 100;
   border-radius: 8px;
-  display: none;
   justify-content: center;
   align-items: center;
   transition: all 250ms ease-in-out;
   animation: bounce-in backwards;
   animation-duration: 200ms;
   animation-timing-function: ease-out;
+  display: flex;
 }
 
 .menu__links {
@@ -219,7 +237,10 @@ nav {
 }
 
 .menu__link {
+  display: inline-block;
+  overflow: hidden;
   margin-bottom: 12px;
+  color: white;
 }
 
 @keyframes bounce-in {
@@ -260,7 +281,7 @@ nav {
 #search__button {
   position: absolute;
   top: 8px;
-  right: 0px;
+  right: 12px;
   padding: 10px;
   border: none;
   border-radius: 12px;
@@ -314,6 +335,7 @@ nav {
   -webkit-text-fill-color: transparent;
   display: inline-block;
   text-align: center;
+  padding: 0 6px;
 }
 
 .sort__search {
@@ -590,6 +612,13 @@ nav {
     display: flex;
     justify-content: center;
     text-align: center;
+  }
+  #movie-display{
+    margin-top: 80px;
+  }
+  .page__arrows{
+    top: 50px;
+    left: 44.25%;
   }
 }
 

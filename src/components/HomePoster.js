@@ -6,7 +6,6 @@ const API_KEY = `e4584088`;
 const URL = `https://www.omdbapi.com/?apikey=${API_KEY}&i=`;
 
 function HomePoster({ id }) {
-  console.log(id);
   let navigate = useNavigate();
   const [movie, setMovie] = useState();
 
