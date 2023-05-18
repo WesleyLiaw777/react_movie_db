@@ -15,12 +15,16 @@ function SearchResults() {
   const [loading, setLoading] = useState(false);
   const [displayPage, setDisplayPage] = useState(1);
   const [six, setSix] = useState([]);
-  const [slice, setSlice] = useState(6);
-  const prevSlice = useRef(0);
+  const [slices, setSlices] = useState([0, 6]);
+  let slice = 6;
+  let prevSlice = 0;
+  //Have to update hooks (slice, prevSlice) before code. Code will now only run once they update.
+  //Had some issue before using hooks. Probably completely doable without them.
+  const [showMore, setShowMore] = useState(false);
 
-  //starter value.
+  //initial value, fetches first page.
   let backendPages = 1;
-  const URL = `http://www.omdbapi.com/?s=${keyword}&page=${backendPages}&apikey=${API_KEY}`;
+  let URL = `http://www.omdbapi.com/?s=${keyword}&page=${backendPages}&apikey=${API_KEY}`;
 
   //dummy initial value.
   let totalBackendPages = 10;
@@ -29,60 +33,79 @@ function SearchResults() {
     console.log(`previous page called`);
   };
 
-  const showNextPage = () => {
-    // setSlice((slice) => (slice*2))
-    console.log(`Next page prev slice${prevSlice.current}`);
-    console.log(`Next page slice: ${slice}`);
-    if (allResults.length < slice) {
-      fetchMovies();
-      console.log(allResults);
+  useEffect(() => {
+    //It's rendering twice because I set showMore to false. This if statement will address that.
+    if (showMore) {
+      backendPages = backendPages + 1;
+      setSlices(prevSlices => [
+        prevSlices[0] = prevSlices[1],
+        prevSlices[1] + 6,
+      ]);
     }
-  };
+  }, [showMore]);
 
   //removed keyword param, as we no longer append it to URL.
   async function fetchMovies() {
     setLoading(true);
 
-    //Checking if we should start another fetch
-    if (backendPages > 1 && backendPages < totalBackendPages) {
-      backendPages++;
-    }
-    if (backendPages === totalBackendPages) {
-      alert("No more results");
-      return;
-    }
-
+    //I needed to update the URL manually, as updating the variables (backendPages) wouldn't change it.
+    URL = `http://www.omdbapi.com/?s=${keyword}&page=${backendPages}&apikey=${API_KEY}`;
+    console.log(URL)
     const response = await axios.get(URL);
     const movies = response.data;
     setAllResults((allResults) => allResults.concat(movies.Search));
-
     //Runs only on first go for new keyword.
     if (backendPages === 1) {
       totalBackendPages = Math.ceil(movies.totalResults / PAGE_SIZE);
+      // setSix(allResults.slice(slices[0], slices[1]));
     }
-    console.log(
-      `Pre-update data. prevSlice: ${prevSlice.current}, slice: ${slice}`
-    );
-    prevSlice.current = slice;
   }
 
+  //Updates new set of 6 movies to display
+  // useEffect(() => {
+  //   console.log(`allResults changed:`);
+  //   console.log(allResults);
+  //   console.log(`slices for six: ${prevSlice}, ${slice}`);
+
+  //   setSix(allResults.slice(prevSlice, slice));
+
+  //   //So you can see the skeleton
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 2000);
+  // }, [allResults]);
+
+  //dependency on slice variant.
   useEffect(() => {
-    console.log(
-      `Preslice data. prevSlice: ${prevSlice.current}, slice: ${slice}`
-    );
-    setSix(allResults.slice(prevSlice, slice));
+    if (allResults.length < slices[1]) {
+      fetchMovies();
+      console.log(
+        `page fetch ran. allresults length: ${allResults.length}. slices : ${slices[0]}, ${slices[1]}`
+      );
+    }
+    setShowMore(false);
+    console.log(`allResults:`)
+    console.log(allResults)
+    console.log(`slices for six: ${slices[0]}, ${slices[1]}`);
+    setSix(allResults.slice(slices[0], slices[1]));
+
     //So you can see the skeleton
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
-  }, [allResults]);
+    }, 2000);
+  }, [slices, allResults]);
 
   useEffect(() => {
-    //if we have a new keyword, we reset values.
+    console.log(`six changed:`);
+    console.log(six);
+  }, [six]);
+
+  //if we have a new keyword, we reset values.
+  useEffect(() => {
     if (keyword !== undefined && keyword !== prevKeywordRef.current) {
       setAllResults([]);
-      prevSlice.current = 0;
-      setSlice(6);
+      setSix([]);
+      setSlices((prevSlices) => [(prevSlices[0] = 0), (prevSlices[1] = 6)]);
       backendPages = 1;
       prevKeywordRef.current = keyword;
       fetchMovies(keyword);
@@ -95,7 +118,8 @@ function SearchResults() {
       <>
         {keyword ? (
           <div className="search__message">
-            Search results for "<span>{keyword}</span>"
+            Search results for "<span className="text_emphasis">{keyword}</span>
+            "
             <div className="page__arrows">
               {displayPage <= 1 ? (
                 <FaChevronLeft className="no_cursor greyed_out" />
@@ -109,7 +133,7 @@ function SearchResults() {
               {backendPages < totalBackendPages ? (
                 <FaChevronRight
                   className="cursor hover_effect"
-                  onClick={() => showNextPage()}
+                  onClick={() => setShowMore(true)}
                 />
               ) : (
                 <FaChevronRight className="no_cursor greyed_out" />
