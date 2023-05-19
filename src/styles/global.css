@@ -52,7 +52,6 @@ button {
   background-color: #0d1011;
   border-radius: 24px;
   border: 1px solid lightgrey;
-  margin: 0 8px;
   padding: 10px 14px;
   font-weight: 600;
 }
@@ -281,7 +280,7 @@ nav {
 #search__button {
   position: absolute;
   top: 8px;
-  right: 12px;
+  right: 22px;
   padding: 10px;
   border: none;
   border-radius: 12px;
@@ -497,6 +496,7 @@ nav {
 .genre__button{
   transition: all 200ms ease;
   color: white;
+  margin-right: 16px;
 }
 
 .genre__button:hover{
@@ -579,6 +579,10 @@ nav {
   margin: 0 auto;
   width: 60%;
   height: 12px;
+}
+
+.back__button{
+  margin-left: 36px;
 }
 
 /* RESPONSIVENESS */

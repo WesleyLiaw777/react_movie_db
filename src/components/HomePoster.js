@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const API_KEY = `e4584088`;
 const URL = `https://www.omdbapi.com/?apikey=${API_KEY}&i=`;

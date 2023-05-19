@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import HomePoster from "../components/HomePoster";
 
@@ -12,12 +11,9 @@ const movies = [
 ];
 
 function Home() {
-  let navigate = useNavigate();
   return (
     <>
       <SearchBar />
-      
-
       <section id="movie-display">
         <div className="container">
           <div className="row">

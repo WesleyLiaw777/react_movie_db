@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaCircleNotch, FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
@@ -7,35 +7,36 @@ function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const errorMessage = () => {
+  const emptyError = () => {
     alert("Please enter a keyword or phrase.");
   };
 
-  const enterSearchTerm = (key) => {
-    if (key === "Enter") {
-      if (searchTerm) {
-        setLoading(true);
-
-        window.setTimeout(() => {
-          navigate(`/search/${searchTerm}`);
-          setLoading(false);
-        }, 1000);
-      } else {
-        errorMessage();
-      }
-    }
+  const shortError = () => {
+    alert("Keyword must be at least 3 letters.");
   };
 
-  const clickSearchTerm = () => {
+  const changePage = () => {
     if (searchTerm) {
+      if (searchTerm.length <= 2) {
+        shortError();
+        return;
+      }
       setLoading(true);
       window.setTimeout(() => {
         navigate(`/search/${searchTerm}`);
         setLoading(false);
       }, 1000);
     } else {
-      errorMessage();
+      emptyError();
     }
+  };
+
+  //Did not make 1 function to handle both keys and clicks, enter requires parameters to be passed in.
+  const enterSearchTerm = (key) => {
+    key === "Enter" && changePage();
+  };
+  const clickSearchTerm = () => {
+    searchTerm && changePage();
   };
 
   return (

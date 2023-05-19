@@ -16,9 +16,7 @@ function Movie() {
 
   const goBack = () => {
     const currentPath = window.location.pathname;
-    console.log(currentPath);
     const newPath = currentPath.substring(0, currentPath.lastIndexOf("/"));
-    console.log(newPath);
     if (newPath === "") {
       navigate("/");
     }
@@ -39,7 +37,7 @@ function Movie() {
 
   return (
     <>
-      <button onClick={goBack} className=" dark__button cursor">
+      <button onClick={goBack} className="back__button dark__button cursor">
         <FaArrowLeft /> Back
       </button>
 

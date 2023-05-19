@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,14 +17,14 @@ function Nav() {
 
         <ul className="nav__link--list">
           <li>
-            <Link to="/" className="nav__link link__hover-effect">
+            <NavLink to="/" className="nav__link link__hover-effect">
               Home
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="./search" className="nav__link link__hover-effect">
+            <NavLink to="./search" className="nav__link link__hover-effect">
               Find a movie!
-            </Link>
+            </NavLink>
           </li>
           <li>
             <Link to="#" className="nav__link link__hover-effect no_cursor">
