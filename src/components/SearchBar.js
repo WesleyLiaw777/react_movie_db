@@ -36,6 +36,9 @@ function SearchBar() {
     key === "Enter" && changePage();
   };
   const clickSearchTerm = () => {
+    if (!searchTerm) {
+      emptyError();
+    }
     searchTerm && changePage();
   };
 

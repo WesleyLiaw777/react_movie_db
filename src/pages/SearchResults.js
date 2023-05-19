@@ -94,7 +94,7 @@ function SearchResults() {
     //So you can see the skeleton
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1000);
   }, [allResults]);
 
   //if we have a new keyword, we reset values.

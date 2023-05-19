@@ -8,7 +8,7 @@ import SearchResults from './pages/SearchResults';
 function App() {
   return (
     
-    <Router>
+    <Router basename="/">
       <div className="App">
         <Nav/>
       </div>
