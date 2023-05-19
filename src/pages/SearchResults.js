@@ -62,7 +62,7 @@ function SearchResults() {
 
   useEffect(() => {
     //ensures it won't run on first go
-    if (allResults.length < slices[1] && slices[1] != RESULTS_SET) {
+    if (allResults.length < slices[1] && slices[1] !== RESULTS_SET) {
       backendPages++;
       fetchMovies();
     } else {
@@ -121,6 +121,7 @@ function SearchResults() {
           <img
             className="results__background--img"
             src="/poster_collection.jpg"
+            alt="background_image"
           />
         </figure>
       ) : (
