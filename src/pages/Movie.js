@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { FaArrowLeft, FaPlus, FaTicketAlt } from "react-icons/fa";
 
 const API_KEY = `e4584088`;
-const URL = `http://www.omdbapi.com/?apikey=${API_KEY}&i=`;
+const URL = `https://www.omdbapi.com/?apikey=${API_KEY}&i=`;
 
 function Movie() {
   const { id } = useParams();

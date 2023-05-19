@@ -28,7 +28,7 @@ function SearchResults() {
   const [showMore, setShowMore] = useState(false);
 
   //initial value, fetches first page.
-  let URL = `http://www.omdbapi.com/?s=${keyword}&page=${backendPages}&apikey=${API_KEY}`;
+  let URL = `https://www.omdbapi.com/?s=${keyword}&page=${backendPages}&apikey=${API_KEY}`;
 
   //dummy initial value.
   let totalBackendPages = 10;
@@ -76,7 +76,7 @@ function SearchResults() {
     setLoading(true);
 
     //I needed to update the URL manually, as updating the variables (backendPages) wouldn't change it.
-    URL = `http://www.omdbapi.com/?s=${keyword}&page=${backendPages}&apikey=${API_KEY}`;
+    URL = `https://www.omdbapi.com/?s=${keyword}&page=${backendPages}&apikey=${API_KEY}`;
     const response = await axios.get(URL);
     const movies = response.data;
     setAllResults((allResults) => allResults.concat(movies.Search));
