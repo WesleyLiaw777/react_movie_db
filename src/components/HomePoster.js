@@ -20,7 +20,7 @@ function HomePoster({ id }) {
 
   return (
     <>
-      {movie && (
+      {movie ? (
         <div className="movie cursor" onClick={() => navigate(`/${id}`)}>
           <figure className="movie__poster--wrapper">
             <img
@@ -34,6 +34,16 @@ function HomePoster({ id }) {
             <h5>{movie.Year}</h5>
           </div>
         </div>
+      ) : (
+        <>
+          <div className="movie">
+            <figure className="movie__poster--wrapper skeleton"></figure>
+            <div className="movie__info--skeleton">
+              <h4 className="movie__title--skeleton skeleton"></h4>
+              <h5 className="movie__year--skeleton skeleton"></h5>
+            </div>
+          </div>
+        </>
       )}
     </>
   );
